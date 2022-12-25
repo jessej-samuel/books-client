@@ -17,35 +17,43 @@ const NewBook = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    postBook().finally(() =>
-      setData({
-        title: "",
-        author: "",
-      })
-    );
+    if (data.title && data.author)
+      postBook().finally(() =>
+        setData({
+          title: "",
+          author: "",
+        })
+      );
   };
 
   return (
-    <form onSubmit={onSubmit}>
-      <div>
-        <label htmlFor="title">Title</label>
-        <input
-          id="title"
-          type={"text"}
-          value={data.title}
-          onChange={(e) => setData({ ...data, title: e.target.value })}
-        />
-      </div>
-      <div>
-        <label htmlFor="author">Author</label>
-        <input
-          id="author"
-          type={"text"}
-          value={data.author}
-          onChange={(e) => setData({ ...data, author: e.target.value })}
-        />
-      </div>
-      <input type={"submit"} value="Create new book" />
+    <form
+      onSubmit={onSubmit}
+      className="bg-black/10 p-1 grid grid-cols-4 grid-flow-row gap-1"
+    >
+      <label htmlFor="title">Title</label>
+      <input
+        id="title"
+        type={"text"}
+        value={data.title}
+        className="col-span-3"
+        onChange={(e) => setData({ ...data, title: e.target.value })}
+      />
+
+      <label htmlFor="author">Author</label>
+      <input
+        id="author"
+        type={"text"}
+        value={data.author}
+        className="col-span-3"
+        onChange={(e) => setData({ ...data, author: e.target.value })}
+      />
+
+      <input
+        type={"submit"}
+        value="Create new book"
+        className="bg-green-400 text-white py-1 px-2 rounded col-span-full"
+      />
     </form>
   );
 };

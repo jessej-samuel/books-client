@@ -21,7 +21,7 @@ const BookList = () => {
   }, [flag, reset]);
 
   return (
-    <ul>
+    <ul className="w-72">
       {books.map((book) => {
         return <Book book={book} key={book.id} />;
       })}
