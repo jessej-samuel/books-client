@@ -17,8 +17,8 @@ const BookList = () => {
 
   // Fetch books when zustand update flag changes
   useEffect(() => {
-    if (flag == 1) fetchBooks().then(() => reset());
-  }, [, flag]);
+    if (flag === 1) fetchBooks().then(() => reset());
+  }, [flag, reset]);
 
   return (
     <ul>
