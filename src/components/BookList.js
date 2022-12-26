@@ -21,7 +21,7 @@ const BookList = () => {
   }, [flag, reset]);
 
   return (
-    <ul className="w-72">
+    <ul className="w-full flex justify-start flex-wrap ">
       {books.map((book) => {
         return <Book book={book} key={book.id} />;
       })}
