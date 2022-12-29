@@ -1,42 +1,30 @@
-import BookApi from "../api/BookApi";
-import useStore from "../hooks/useStore";
+import ReactStars from "react-rating-stars-component";
+import { Link } from "react-router-dom";
 
-const Book = ({ book }) => {
-  const update = useStore((state) => state.update);
-
-  // Utility function for deleting a book
-  const onDelete = async () => {
-    const res = await BookApi.delete("/books", { data: { id: book.id } });
-    update();
-    console.log(res.data);
-  };
-
-  // Utitlity function for editing a book's data
-  const onEdit = async () => {
-    const res = await BookApi.put("/books", {
-      ...book,
-      title: book.title + " [edited]",
-    });
-    update();
-    console.log(res.data);
-  };
-
+const Book = ({ book, id }) => {
   return (
-    <li className="border w-56 h-96 rounded mb-1 last:mb-0 last:mt-1 p-1 flex flex-col gap-2">
-      <h2 className="text-lg max-w-full">{book.title}</h2>
-      <p className="text-sm text-neutral-500"> By {book.author}</p>
-      <button
-        onClick={() => onDelete(book.id)}
-        className="bg-red-500 text-white py-1 px-2 rounded"
-      >
-        Delete
-      </button>
-      <button
-        onClick={() => onEdit(book.id)}
-        className="bg-blue-500 text-white py-1 px-2 rounded"
-      >
-        Edit
-      </button>
+    <li className="w-[200px] bg-cover bg-center rounded">
+      <Link to={`/book/${book.id}`} className="h-full w-[200px] inline-block">
+        <img
+          src={book.image_link}
+          alt={book.title + " by " + book.author}
+          className="h-80  rounded-lg"
+        />
+        <h3 className="text-lg">{book.title}</h3>
+        <p className="text-black/50 text-sm">by {book.author}</p>
+        <ReactStars
+          count={5}
+          size={24}
+          isHalf={true}
+          value={Math.random() * 5}
+          edit={false}
+          emptyIcon={<i className="fa fa-star"></i>}
+          halfIcon={<i className="fa fa-star-half-alt"></i>}
+          fullIcon={<i className="fa fa-star"></i>}
+          activeColor="#ffd700"
+        />
+        <p className="text-red-500 text-sm">$10.00</p>
+      </Link>
     </li>
   );
 };
